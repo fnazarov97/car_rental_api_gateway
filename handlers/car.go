@@ -16,8 +16,8 @@ import (
 // @Tags        cars
 // @Accept      json
 // @Produce     json
-// @Param       car       body     models.CreateCarModel true  "car body"
-// @Param       Authorization header   string                    false "Authorization"
+// @Param       car           body     models.CreateCarModel true  "car body"
+// @Param       Authorization header   string                false "Authorization"
 // @Success     201           {object} models.JSONResponse{data=models.PackedCarModel}
 // @Failure     400           {object} models.JSONErrorResponse
 // @Router      /v1/car [post]
@@ -144,8 +144,8 @@ func (h Handler) GetCarList(c *gin.Context) {
 // @Tags        cars
 // @Accept      json
 // @Produce     json
-// @Param       car       body     models.UpdateCarModel true  "car body"
-// @Param       Authorization header   string                    false "Authorization"
+// @Param       car           body     models.UpdateCarModel true  "car body"
+// @Param       Authorization header   string                false "Authorization"
 // @Success     200           {object} models.JSONResponse{data=[]models.Car}
 // @Response    400           {object} models.JSONErrorResponse
 // @Router      /v1/car [put]

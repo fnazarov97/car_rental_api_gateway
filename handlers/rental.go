@@ -79,7 +79,7 @@ func (h Handler) CreateRental(c *gin.Context) {
 // @Param       id            path   string true  "Rental ID"
 // @Param       Authorization header string false "Authorization"
 // @Produce     json
-// @Success     200 {object} models.JSONResponse{data=models.Rental}
+// @Success     200 {object} models.JSONResponse{data=models.PackedRentalModel}
 // @Failure     400 {object} models.JSONErrorResponse
 // @Router      /v1/rental/{id} [get]
 func (h Handler) GetRentalByID(c *gin.Context) {
@@ -95,13 +95,12 @@ func (h Handler) GetRentalByID(c *gin.Context) {
 		})
 		return
 	}
-
 	car, err := h.grpcClients.Car.GetCarByID(c.Request.Context(), &car.GetCarByIDRequest{
 		Id: rental.CarId,
 	})
 	if err != nil {
 		c.JSON(http.StatusNotFound, models.JSONErrorResponse{
-			Error: "Car not found to create rental",
+			Error: "failed to get car",
 		})
 		return
 	}
@@ -119,7 +118,7 @@ func (h Handler) GetRentalByID(c *gin.Context) {
 	})
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, models.JSONErrorResponse{
-			Error: "User is not registired to rental car",
+			Error: "failed to get user",
 		})
 		return
 	}

@@ -8,9 +8,9 @@
         }
     },
     "paths": {
-        "/v1/article": {
+        "/v1/brand": {
             "get": {
-                "description": "get articles",
+                "description": "get brand",
                 "consumes": [
                     "application/json"
                 ],
@@ -18,9 +18,9 @@
                     "application/json"
                 ],
                 "tags": [
-                    "articles"
+                    "brands"
                 ],
-                "summary": "List articles",
+                "summary": "List brand",
                 "parameters": [
                     {
                         "type": "integer",
@@ -61,7 +61,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/models.Article"
+                                                "$ref": "#/definitions/models.Brand"
                                             }
                                         }
                                     }
@@ -72,7 +72,7 @@
                 }
             },
             "put": {
-                "description": "update a new article",
+                "description": "update a new brand",
                 "consumes": [
                     "application/json"
                 ],
@@ -80,17 +80,303 @@
                     "application/json"
                 ],
                 "tags": [
-                    "articles"
+                    "brands"
                 ],
-                "summary": "update article",
+                "summary": "update brand",
                 "parameters": [
                     {
-                        "description": "article body",
-                        "name": "article",
+                        "description": "brand body",
+                        "name": "brand",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.UpdateArticleModel"
+                            "$ref": "#/definitions/models.UpdateBrandModel"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Brand"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create a new brand",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "brands"
+                ],
+                "summary": "Create brand",
+                "parameters": [
+                    {
+                        "description": "brand body",
+                        "name": "brand",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateBrandModel"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Brand"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/brand/{id}": {
+            "get": {
+                "description": "get an brand by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "brands"
+                ],
+                "summary": "get brand by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Brand ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Brand"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete an brand by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "brands"
+                ],
+                "summary": "delete brand by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "brand ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Brand"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/car": {
+            "get": {
+                "description": "get cars",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "cars"
+                ],
+                "summary": "List cars",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "0",
+                        "name": "offset",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "10",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "search",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/models.Car"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update a new car",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "cars"
+                ],
+                "summary": "update car",
+                "parameters": [
+                    {
+                        "description": "car body",
+                        "name": "car",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateCarModel"
                         }
                     },
                     {
@@ -114,7 +400,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/models.Article"
+                                                "$ref": "#/definitions/models.Car"
                                             }
                                         }
                                     }
@@ -131,7 +417,7 @@
                 }
             },
             "post": {
-                "description": "create a new article",
+                "description": "create a new car",
                 "consumes": [
                     "application/json"
                 ],
@@ -139,17 +425,17 @@
                     "application/json"
                 ],
                 "tags": [
-                    "articles"
+                    "cars"
                 ],
-                "summary": "Create article",
+                "summary": "Create car",
                 "parameters": [
                     {
-                        "description": "article body",
-                        "name": "article",
+                        "description": "car body",
+                        "name": "car",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.CreateArticleModel"
+                            "$ref": "#/definitions/models.CreateCarModel"
                         }
                     },
                     {
@@ -171,7 +457,7 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.Article"
+                                            "$ref": "#/definitions/models.PackedCarModel"
                                         }
                                     }
                                 }
@@ -187,9 +473,9 @@
                 }
             }
         },
-        "/v1/article/{id}": {
+        "/v1/car/{id}": {
             "get": {
-                "description": "get an article by id",
+                "description": "get an car by id",
                 "consumes": [
                     "application/json"
                 ],
@@ -197,13 +483,13 @@
                     "application/json"
                 ],
                 "tags": [
-                    "articles"
+                    "cars"
                 ],
-                "summary": "get article by id",
+                "summary": "get car by id",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Article ID",
+                        "description": "Car ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -227,7 +513,7 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.PackedArticleModel"
+                                            "$ref": "#/definitions/models.PackedCarModel"
                                         }
                                     }
                                 }
@@ -243,7 +529,7 @@
                 }
             },
             "delete": {
-                "description": "delete an article by id",
+                "description": "delete an car by id",
                 "consumes": [
                     "application/json"
                 ],
@@ -251,13 +537,13 @@
                     "application/json"
                 ],
                 "tags": [
-                    "articles"
+                    "cars"
                 ],
-                "summary": "delete article by id",
+                "summary": "delete car by id",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Article ID",
+                        "description": "Car ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -281,7 +567,7 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.DeleteArticleModel"
+                                            "$ref": "#/definitions/models.Car"
                                         }
                                     }
                                 }
@@ -291,292 +577,6 @@
                     "404": {
                         "description": "Not Found",
                         "schema": {}
-                    }
-                }
-            }
-        },
-        "/v1/author": {
-            "get": {
-                "description": "get author",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "authors"
-                ],
-                "summary": "List author",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "0",
-                        "name": "offset",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "10",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "search",
-                        "name": "search",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/models.JSONResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/models.Author"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "update a new author",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "authors"
-                ],
-                "summary": "update author",
-                "parameters": [
-                    {
-                        "description": "author body",
-                        "name": "author",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.UpdateAuthorModel"
-                        }
-                    },
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/models.JSONResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/models.Author"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.JSONErrorResponse"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "create a new author",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "authors"
-                ],
-                "summary": "Create author",
-                "parameters": [
-                    {
-                        "description": "author body",
-                        "name": "author",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.CreateAuthorModel"
-                        }
-                    },
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/models.JSONResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/models.Author"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.JSONErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/author/{id}": {
-            "get": {
-                "description": "get an author by id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "authors"
-                ],
-                "summary": "get author by id",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Author ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/models.JSONResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/models.Author"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.JSONErrorResponse"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "description": "delete an author by id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "authors"
-                ],
-                "summary": "delete author by id",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "author ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/models.JSONResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/models.Author"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.JSONErrorResponse"
-                        }
                     }
                 }
             }
@@ -632,111 +632,434 @@
                     }
                 }
             }
+        },
+        "/v1/rental": {
+            "get": {
+                "description": "get rental",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rentals"
+                ],
+                "summary": "List rental",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "0",
+                        "name": "offset",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "10",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "search",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/models.Rental"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update a new rental",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rentals"
+                ],
+                "summary": "update rental",
+                "parameters": [
+                    {
+                        "description": "rental body",
+                        "name": "rental",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateRentalModel"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Rental"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create a new rental",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rentals"
+                ],
+                "summary": "Create rental",
+                "parameters": [
+                    {
+                        "description": "rental body",
+                        "name": "rental",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateRentalModel"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Rental"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/rental/{id}": {
+            "get": {
+                "description": "get an rental by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rentals"
+                ],
+                "summary": "get rental by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Rental ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.PackedRentalModel"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete an rental by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rentals"
+                ],
+                "summary": "delete rental by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "rental ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Rental"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
-        "models.Article": {
+        "models.Brand": {
             "type": "object",
             "required": [
-                "author_id"
+                "name"
             ],
             "properties": {
-                "author_id": {
-                    "type": "string"
-                },
-                "body": {
+                "brand_id": {
                     "type": "string"
                 },
                 "created_at": {
                     "type": "string"
                 },
-                "id": {
-                    "type": "string"
+                "discription": {
+                    "type": "string",
+                    "example": "bu brand uzAuto tomonidan yaratilgan"
                 },
-                "title": {
-                    "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.Author": {
-            "type": "object",
-            "required": [
-                "fullname"
-            ],
-            "properties": {
-                "created_at": {
-                    "type": "string"
-                },
-                "fullname": {
+                "name": {
                     "type": "string",
                     "maxLength": 255,
                     "minLength": 2,
-                    "example": "John Doe Steve"
-                },
-                "id": {
-                    "type": "string"
+                    "example": "John"
                 },
                 "updated_at": {
                     "type": "string"
-                }
-            }
-        },
-        "models.CreateArticleModel": {
-            "type": "object",
-            "required": [
-                "author_id"
-            ],
-            "properties": {
-                "author_id": {
-                    "type": "string"
                 },
-                "body": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.CreateAuthorModel": {
-            "type": "object",
-            "required": [
-                "fullname"
-            ],
-            "properties": {
-                "fullname": {
+                "year": {
                     "type": "string",
-                    "maxLength": 255,
-                    "minLength": 2,
-                    "example": "John Doe Steve"
+                    "example": "2005"
                 }
             }
         },
-        "models.DeleteArticleModel": {
+        "models.Car": {
             "type": "object",
             "properties": {
-                "author": {
-                    "$ref": "#/definitions/models.Author"
+                "brand_id": {
+                    "type": "string",
+                    "example": "1"
                 },
-                "body": {
+                "car_id": {
                     "type": "string"
+                },
+                "color": {
+                    "type": "string",
+                    "example": "oq"
                 },
                 "created_at": {
                     "type": "string"
                 },
-                "deleted_at": {
-                    "type": "string"
+                "mileage": {
+                    "type": "string",
+                    "example": "800 km"
                 },
-                "id": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
+                "model": {
+                    "type": "string",
+                    "example": "cobolt"
                 },
                 "updated_at": {
+                    "type": "string"
+                },
+                "year": {
+                    "type": "string",
+                    "example": "2018"
+                }
+            }
+        },
+        "models.CreateBrandModel": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "discription": {
+                    "type": "string",
+                    "example": "bu brand uzAuto tomonidan yaratilgan"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 2,
+                    "example": "John"
+                },
+                "year": {
+                    "type": "string",
+                    "example": "2005"
+                }
+            }
+        },
+        "models.CreateCarModel": {
+            "type": "object",
+            "properties": {
+                "brand_id": {
+                    "type": "string",
+                    "example": "1"
+                },
+                "color": {
+                    "type": "string",
+                    "example": "oq"
+                },
+                "mileage": {
+                    "type": "string",
+                    "example": "800 km"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "cobolt"
+                },
+                "year": {
+                    "type": "string",
+                    "example": "2018"
+                }
+            }
+        },
+        "models.CreateRentalModel": {
+            "type": "object",
+            "required": [
+                "car_id",
+                "customer_id",
+                "end_date",
+                "payment",
+                "rental_id",
+                "start_date"
+            ],
+            "properties": {
+                "car_id": {
+                    "type": "string"
+                },
+                "customer_id": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "payment": {
+                    "type": "string"
+                },
+                "rental_id": {
+                    "type": "string"
+                },
+                "start_date": {
                     "type": "string"
                 }
             }
@@ -773,22 +1096,104 @@
                 }
             }
         },
-        "models.PackedArticleModel": {
+        "models.PackedCarModel": {
             "type": "object",
             "properties": {
-                "author": {
-                    "$ref": "#/definitions/models.Author"
+                "brand": {
+                    "$ref": "#/definitions/models.Brand"
                 },
-                "body": {
+                "car_id": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string",
+                    "example": "oq"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "mileage": {
+                    "type": "string",
+                    "example": "800 km"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "cobolt"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "year": {
+                    "type": "string",
+                    "example": "2018"
+                }
+            }
+        },
+        "models.PackedRentalModel": {
+            "type": "object",
+            "required": [
+                "end_date",
+                "payment",
+                "rental_id",
+                "start_date"
+            ],
+            "properties": {
+                "car": {
+                    "$ref": "#/definitions/models.Car"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "payment": {
+                    "type": "string"
+                },
+                "rental_id": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.User"
+                }
+            }
+        },
+        "models.Rental": {
+            "type": "object",
+            "required": [
+                "car_id",
+                "customer_id",
+                "end_date",
+                "payment",
+                "rental_id",
+                "start_date"
+            ],
+            "properties": {
+                "car_id": {
                     "type": "string"
                 },
                 "created_at": {
                     "type": "string"
                 },
-                "id": {
+                "customer_id": {
                     "type": "string"
                 },
-                "title": {
+                "end_date": {
+                    "type": "string"
+                },
+                "payment": {
+                    "type": "string"
+                },
+                "rental_id": {
+                    "type": "string"
+                },
+                "start_date": {
                     "type": "string"
                 },
                 "updated_at": {
@@ -804,33 +1209,131 @@
                 }
             }
         },
-        "models.UpdateArticleModel": {
+        "models.UpdateBrandModel": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "brand_id": {
+                    "type": "string"
+                },
+                "discription": {
+                    "type": "string",
+                    "example": "bu brand uzAuto tomonidan yaratilgan"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 2,
+                    "example": "John"
+                },
+                "year": {
+                    "type": "string",
+                    "example": "2005"
+                }
+            }
+        },
+        "models.UpdateCarModel": {
             "type": "object",
             "properties": {
-                "body": {
+                "brand_id": {
+                    "type": "string",
+                    "example": "1"
+                },
+                "car_id": {
                     "type": "string"
                 },
-                "id": {
+                "color": {
+                    "type": "string",
+                    "example": "oq"
+                },
+                "mileage": {
+                    "type": "string",
+                    "example": "800 km"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "cobolt"
+                },
+                "year": {
+                    "type": "string",
+                    "example": "2018"
+                }
+            }
+        },
+        "models.UpdateRentalModel": {
+            "type": "object",
+            "required": [
+                "car_id",
+                "customer_id",
+                "end_date",
+                "payment",
+                "rental_id",
+                "start_date"
+            ],
+            "properties": {
+                "car_id": {
                     "type": "string"
                 },
-                "title": {
+                "customer_id": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "payment": {
+                    "type": "string"
+                },
+                "rental_id": {
+                    "type": "string"
+                },
+                "start_date": {
                     "type": "string"
                 }
             }
         },
-        "models.UpdateAuthorModel": {
+        "models.User": {
             "type": "object",
             "required": [
-                "fullname"
+                "address",
+                "fname",
+                "id",
+                "lname",
+                "password",
+                "phone",
+                "user_type",
+                "username"
             ],
             "properties": {
-                "fullname": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "minLength": 2,
-                    "example": "John Doe Steve"
+                "address": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "fname": {
+                    "type": "string"
                 },
                 "id": {
+                    "type": "string"
+                },
+                "lname": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_type": {
+                    "type": "string"
+                },
+                "username": {
                     "type": "string"
                 }
             }

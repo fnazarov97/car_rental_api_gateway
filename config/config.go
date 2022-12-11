@@ -14,6 +14,8 @@ type Config struct {
 	AppVersion  string
 	Environment string // development, staging, production
 
+	HTTPPort string
+
 	GRPCPort string
 
 	DefaultOffset string
@@ -49,6 +51,7 @@ func Load() Config {
 	config.AppVersion = cast.ToString(getOrReturnDefaultValue("APP_VERSION", "1.0.1"))
 	config.Environment = cast.ToString(getOrReturnDefaultValue("ENVIRONMENT", "development"))
 
+	config.HTTPPort = cast.ToString(getOrReturnDefaultValue("HTTP_PORT", ":8080"))
 	config.GRPCPort = cast.ToString(getOrReturnDefaultValue("GRPC_PORT", ":7003"))
 
 	config.DefaultOffset = cast.ToString(getOrReturnDefaultValue("DEFAULT_OFFSET", "0"))
@@ -60,11 +63,11 @@ func Load() Config {
 	config.BrandServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("BRAND_SERVICE_GRPC_HOST", "localhost"))
 	config.BrandServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("BRAND_SERVICE_GRPC_PORT", ":7001"))
 
-	config.RentalServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("RENTAL_SERVICE_GRPC_HOST", "localhost"))
-	config.RentalServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("RENTAL_SERVICE_GRPC_PORT", ":7003"))
-
 	config.AuthorizationServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("AUTHORIZATION_SERVICE_GRPC_HOST", "localhost"))
 	config.AuthorizationServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("AUTHORIZATION_SERVICE_GRPC_PORT", ":7002"))
+
+	config.RentalServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("RENTAL_SERVICE_GRPC_HOST", "localhost"))
+	config.RentalServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("RENTAL_SERVICE_GRPC_PORT", ":7003"))
 
 	config.PostgresHost = cast.ToString(getOrReturnDefaultValue("POSTGRES_HOST", "127.0.0.1"))
 	config.PostgresPort = cast.ToInt(getOrReturnDefaultValue("POSTGRES_PORT", 5432))

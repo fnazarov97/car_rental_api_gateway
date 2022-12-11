@@ -46,17 +46,23 @@ func main() {
 		v1.Use(MyCORSMiddleware())
 		v1.POST("/login", h.Login)
 
-		v1.POST("/article", h.AuthMiddleware("*"), h.CreateArticle)
-		v1.GET("/article/:id", h.AuthMiddleware("*"), h.GetArticleByID)
-		v1.GET("/article", h.AuthMiddleware("*"), h.GetArticleList)
-		v1.PUT("/article", h.AuthMiddleware("*"), h.UpdateArticle)
-		v1.DELETE("/article/:id", h.AuthMiddleware("*"), h.DeleteArticle)
+		v1.POST("/car", h.AuthMiddleware("*"), h.CreateCar)
+		v1.GET("/car/:id", h.AuthMiddleware("*"), h.GetCarByID)
+		v1.GET("/car", h.AuthMiddleware("*"), h.GetCarList)
+		v1.PUT("/car", h.AuthMiddleware("*"), h.UpdateCar)
+		v1.DELETE("/car/:id", h.AuthMiddleware("*"), h.DeleteCar)
 
-		v1.POST("/author", h.AuthMiddleware("*"), h.CreateAuthor)
-		v1.GET("/author/:id", h.AuthMiddleware("*"), h.GetAuthorByID)
-		v1.GET("/author", h.AuthMiddleware("*"), h.GetAuthorList)
-		v1.PUT("/author", h.AuthMiddleware("*"), h.UpdateAuthor)
-		v1.DELETE("/author/:id", h.AuthMiddleware("*"), h.DeleteAuthor)
+		v1.POST("/brand", h.AuthMiddleware("*"), h.CreateBrand)
+		v1.GET("/brand/:id", h.AuthMiddleware("*"), h.GetBrandByID)
+		v1.GET("/brand", h.AuthMiddleware("*"), h.GetBrandList)
+		v1.PUT("/brand", h.AuthMiddleware("*"), h.UpdateBrand)
+		v1.DELETE("/brand/:id", h.AuthMiddleware("*"), h.DeleteBrand)
+
+		v1.POST("/rental", h.AuthMiddleware("*"), h.CreateRental)
+		v1.GET("/rental/:id", h.AuthMiddleware("*"), h.GetRentalByID)
+		v1.GET("/rental", h.AuthMiddleware("*"), h.GetRentalList)
+		v1.PUT("/rental", h.AuthMiddleware("*"), h.UpdateRental)
+		v1.DELETE("/rental/:id", h.AuthMiddleware("*"), h.DeleteRental)
 	}
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

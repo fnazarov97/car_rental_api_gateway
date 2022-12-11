@@ -1,74 +1,105 @@
 definitions:
-  models.Article:
+  models.Brand:
     properties:
-      author_id:
-        type: string
-      body:
+      brand_id:
         type: string
       created_at:
         type: string
-      id:
+      discription:
+        example: bu brand uzAuto tomonidan yaratilgan
         type: string
-      title:
-        type: string
-      updated_at:
-        type: string
-    required:
-    - author_id
-    type: object
-  models.Author:
-    properties:
-      created_at:
-        type: string
-      fullname:
-        example: John Doe Steve
+      name:
+        example: John
         maxLength: 255
         minLength: 2
         type: string
-      id:
-        type: string
       updated_at:
         type: string
-    required:
-    - fullname
-    type: object
-  models.CreateArticleModel:
-    properties:
-      author_id:
-        type: string
-      body:
-        type: string
-      title:
+      year:
+        example: "2005"
         type: string
     required:
-    - author_id
+    - name
     type: object
-  models.CreateAuthorModel:
+  models.Car:
     properties:
-      fullname:
-        example: John Doe Steve
-        maxLength: 255
-        minLength: 2
+      brand_id:
+        example: "1"
         type: string
-    required:
-    - fullname
-    type: object
-  models.DeleteArticleModel:
-    properties:
-      author:
-        $ref: '#/definitions/models.Author'
-      body:
+      car_id:
+        type: string
+      color:
+        example: oq
         type: string
       created_at:
         type: string
-      deleted_at:
+      mileage:
+        example: 800 km
         type: string
-      id:
-        type: string
-      title:
+      model:
+        example: cobolt
         type: string
       updated_at:
         type: string
+      year:
+        example: "2018"
+        type: string
+    type: object
+  models.CreateBrandModel:
+    properties:
+      discription:
+        example: bu brand uzAuto tomonidan yaratilgan
+        type: string
+      name:
+        example: John
+        maxLength: 255
+        minLength: 2
+        type: string
+      year:
+        example: "2005"
+        type: string
+    required:
+    - name
+    type: object
+  models.CreateCarModel:
+    properties:
+      brand_id:
+        example: "1"
+        type: string
+      color:
+        example: oq
+        type: string
+      mileage:
+        example: 800 km
+        type: string
+      model:
+        example: cobolt
+        type: string
+      year:
+        example: "2018"
+        type: string
+    type: object
+  models.CreateRentalModel:
+    properties:
+      car_id:
+        type: string
+      customer_id:
+        type: string
+      end_date:
+        type: string
+      payment:
+        type: string
+      rental_id:
+        type: string
+      start_date:
+        type: string
+    required:
+    - car_id
+    - customer_id
+    - end_date
+    - payment
+    - rental_id
+    - start_date
     type: object
   models.JSONErrorResponse:
     properties:
@@ -91,46 +122,175 @@ definitions:
     - password
     - username
     type: object
-  models.PackedArticleModel:
+  models.PackedCarModel:
     properties:
-      author:
-        $ref: '#/definitions/models.Author'
-      body:
+      brand:
+        $ref: '#/definitions/models.Brand'
+      car_id:
+        type: string
+      color:
+        example: oq
         type: string
       created_at:
         type: string
-      id:
+      mileage:
+        example: 800 km
         type: string
-      title:
+      model:
+        example: cobolt
         type: string
       updated_at:
         type: string
+      year:
+        example: "2018"
+        type: string
+    type: object
+  models.PackedRentalModel:
+    properties:
+      car:
+        $ref: '#/definitions/models.Car'
+      created_at:
+        type: string
+      end_date:
+        type: string
+      payment:
+        type: string
+      rental_id:
+        type: string
+      start_date:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+    required:
+    - end_date
+    - payment
+    - rental_id
+    - start_date
+    type: object
+  models.Rental:
+    properties:
+      car_id:
+        type: string
+      created_at:
+        type: string
+      customer_id:
+        type: string
+      end_date:
+        type: string
+      payment:
+        type: string
+      rental_id:
+        type: string
+      start_date:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - car_id
+    - customer_id
+    - end_date
+    - payment
+    - rental_id
+    - start_date
     type: object
   models.TokenResponse:
     properties:
       token:
         type: string
     type: object
-  models.UpdateArticleModel:
+  models.UpdateBrandModel:
     properties:
-      body:
+      brand_id:
         type: string
-      id:
+      discription:
+        example: bu brand uzAuto tomonidan yaratilgan
         type: string
-      title:
-        type: string
-    type: object
-  models.UpdateAuthorModel:
-    properties:
-      fullname:
-        example: John Doe Steve
+      name:
+        example: John
         maxLength: 255
         minLength: 2
         type: string
-      id:
+      year:
+        example: "2005"
         type: string
     required:
-    - fullname
+    - name
+    type: object
+  models.UpdateCarModel:
+    properties:
+      brand_id:
+        example: "1"
+        type: string
+      car_id:
+        type: string
+      color:
+        example: oq
+        type: string
+      mileage:
+        example: 800 km
+        type: string
+      model:
+        example: cobolt
+        type: string
+      year:
+        example: "2018"
+        type: string
+    type: object
+  models.UpdateRentalModel:
+    properties:
+      car_id:
+        type: string
+      customer_id:
+        type: string
+      end_date:
+        type: string
+      payment:
+        type: string
+      rental_id:
+        type: string
+      start_date:
+        type: string
+    required:
+    - car_id
+    - customer_id
+    - end_date
+    - payment
+    - rental_id
+    - start_date
+    type: object
+  models.User:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      fname:
+        type: string
+      id:
+        type: string
+      lname:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      updated_at:
+        type: string
+      user_type:
+        type: string
+      username:
+        type: string
+    required:
+    - address
+    - fname
+    - id
+    - lname
+    - password
+    - phone
+    - user_type
+    - username
     type: object
 info:
   contact: {}
@@ -138,11 +298,11 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 paths:
-  /v1/article:
+  /v1/brand:
     get:
       consumes:
       - application/json
-      description: get articles
+      description: get brand
       parameters:
       - description: "0"
         in: query
@@ -171,23 +331,23 @@ paths:
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/models.Article'
+                    $ref: '#/definitions/models.Brand'
                   type: array
               type: object
-      summary: List articles
+      summary: List brand
       tags:
-      - articles
+      - brands
     post:
       consumes:
       - application/json
-      description: create a new article
+      description: create a new brand
       parameters:
-      - description: article body
+      - description: brand body
         in: body
-        name: article
+        name: brand
         required: true
         schema:
-          $ref: '#/definitions/models.CreateArticleModel'
+          $ref: '#/definitions/models.CreateBrandModel'
       - description: Authorization
         in: header
         name: Authorization
@@ -202,26 +362,26 @@ paths:
             - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.Article'
+                  $ref: '#/definitions/models.Brand'
               type: object
         "400":
           description: Bad Request
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: Create article
+      summary: Create brand
       tags:
-      - articles
+      - brands
     put:
       consumes:
       - application/json
-      description: update a new article
+      description: update a new brand
       parameters:
-      - description: article body
+      - description: brand body
         in: body
-        name: article
+        name: brand
         required: true
         schema:
-          $ref: '#/definitions/models.UpdateArticleModel'
+          $ref: '#/definitions/models.UpdateBrandModel'
       - description: Authorization
         in: header
         name: Authorization
@@ -236,24 +396,22 @@ paths:
             - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  items:
-                    $ref: '#/definitions/models.Article'
-                  type: array
+                  $ref: '#/definitions/models.Brand'
               type: object
         "400":
           description: Bad Request
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: update article
+      summary: update brand
       tags:
-      - articles
-  /v1/article/{id}:
+      - brands
+  /v1/brand/{id}:
     delete:
       consumes:
       - application/json
-      description: delete an article by id
+      description: delete an brand by id
       parameters:
-      - description: Article ID
+      - description: brand ID
         in: path
         name: id
         required: true
@@ -272,20 +430,196 @@ paths:
             - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.DeleteArticleModel'
+                  $ref: '#/definitions/models.Brand'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: delete brand by id
+      tags:
+      - brands
+    get:
+      consumes:
+      - application/json
+      description: get an brand by id
+      parameters:
+      - description: Brand ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Brand'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: get brand by id
+      tags:
+      - brands
+  /v1/car:
+    get:
+      consumes:
+      - application/json
+      description: get cars
+      parameters:
+      - description: "0"
+        in: query
+        name: offset
+        type: integer
+      - description: "10"
+        in: query
+        name: limit
+        type: integer
+      - description: search
+        in: query
+        name: search
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Car'
+                  type: array
+              type: object
+      summary: List cars
+      tags:
+      - cars
+    post:
+      consumes:
+      - application/json
+      description: create a new car
+      parameters:
+      - description: car body
+        in: body
+        name: car
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateCarModel'
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.PackedCarModel'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Create car
+      tags:
+      - cars
+    put:
+      consumes:
+      - application/json
+      description: update a new car
+      parameters:
+      - description: car body
+        in: body
+        name: car
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateCarModel'
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Car'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: update car
+      tags:
+      - cars
+  /v1/car/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete an car by id
+      parameters:
+      - description: Car ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Car'
               type: object
         "404":
           description: Not Found
           schema: {}
-      summary: delete article by id
+      summary: delete car by id
       tags:
-      - articles
+      - cars
     get:
       consumes:
       - application/json
-      description: get an article by id
+      description: get an car by id
       parameters:
-      - description: Article ID
+      - description: Car ID
         in: path
         name: id
         required: true
@@ -304,189 +638,15 @@ paths:
             - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.PackedArticleModel'
+                  $ref: '#/definitions/models.PackedCarModel'
               type: object
         "400":
           description: Bad Request
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: get article by id
+      summary: get car by id
       tags:
-      - articles
-  /v1/author:
-    get:
-      consumes:
-      - application/json
-      description: get author
-      parameters:
-      - description: "0"
-        in: query
-        name: offset
-        type: integer
-      - description: "10"
-        in: query
-        name: limit
-        type: integer
-      - description: search
-        in: query
-        name: search
-        type: string
-      - description: Authorization
-        in: header
-        name: Authorization
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/models.JSONResponse'
-            - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/models.Author'
-                  type: array
-              type: object
-      summary: List author
-      tags:
-      - authors
-    post:
-      consumes:
-      - application/json
-      description: create a new author
-      parameters:
-      - description: author body
-        in: body
-        name: author
-        required: true
-        schema:
-          $ref: '#/definitions/models.CreateAuthorModel'
-      - description: Authorization
-        in: header
-        name: Authorization
-        type: string
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            allOf:
-            - $ref: '#/definitions/models.JSONResponse'
-            - properties:
-                data:
-                  $ref: '#/definitions/models.Author'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.JSONErrorResponse'
-      summary: Create author
-      tags:
-      - authors
-    put:
-      consumes:
-      - application/json
-      description: update a new author
-      parameters:
-      - description: author body
-        in: body
-        name: author
-        required: true
-        schema:
-          $ref: '#/definitions/models.UpdateAuthorModel'
-      - description: Authorization
-        in: header
-        name: Authorization
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/models.JSONResponse'
-            - properties:
-                data:
-                  $ref: '#/definitions/models.Author'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.JSONErrorResponse'
-      summary: update author
-      tags:
-      - authors
-  /v1/author/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: delete an author by id
-      parameters:
-      - description: author ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Authorization
-        in: header
-        name: Authorization
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/models.JSONResponse'
-            - properties:
-                data:
-                  $ref: '#/definitions/models.Author'
-              type: object
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.JSONErrorResponse'
-      summary: delete author by id
-      tags:
-      - authors
-    get:
-      consumes:
-      - application/json
-      description: get an author by id
-      parameters:
-      - description: Author ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Authorization
-        in: header
-        name: Authorization
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/models.JSONResponse'
-            - properties:
-                data:
-                  $ref: '#/definitions/models.Author'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.JSONErrorResponse'
-      summary: get author by id
-      tags:
-      - authors
+      - cars
   /v1/login:
     post:
       consumes:
@@ -518,4 +678,178 @@ paths:
       summary: Login
       tags:
       - auth
+  /v1/rental:
+    get:
+      consumes:
+      - application/json
+      description: get rental
+      parameters:
+      - description: "0"
+        in: query
+        name: offset
+        type: integer
+      - description: "10"
+        in: query
+        name: limit
+        type: integer
+      - description: search
+        in: query
+        name: search
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Rental'
+                  type: array
+              type: object
+      summary: List rental
+      tags:
+      - rentals
+    post:
+      consumes:
+      - application/json
+      description: create a new rental
+      parameters:
+      - description: rental body
+        in: body
+        name: rental
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateRentalModel'
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Rental'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Create rental
+      tags:
+      - rentals
+    put:
+      consumes:
+      - application/json
+      description: update a new rental
+      parameters:
+      - description: rental body
+        in: body
+        name: rental
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateRentalModel'
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Rental'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: update rental
+      tags:
+      - rentals
+  /v1/rental/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete an rental by id
+      parameters:
+      - description: rental ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Rental'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: delete rental by id
+      tags:
+      - rentals
+    get:
+      consumes:
+      - application/json
+      description: get an rental by id
+      parameters:
+      - description: Rental ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.PackedRentalModel'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: get rental by id
+      tags:
+      - rentals
 swagger: "2.0"
