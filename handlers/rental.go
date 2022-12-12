@@ -71,43 +71,6 @@ func (h Handler) GetRentalByID(c *gin.Context) {
 		})
 		return
 	}
-	// car, err := h.grpcClients.Car.GetCarByID(c.Request.Context(), &car.GetCarByIDRequest{
-	// 	Id: rental.CarId,
-	// })
-	// if err != nil {
-	// 	c.JSON(http.StatusNotFound, models.JSONErrorResponse{
-	// 		Error: "failed to get car",
-	// 	})
-	// 	return
-	// }
-	// rental.Car.CarId = car.CarId
-	// rental.Car.Model = car.Model
-	// rental.Car.Color = car.Color
-	// rental.Car.Year = car.Year
-	// rental.Car.Mileage = car.Mileage
-	// rental.Car.BrandId = car.Brand.BrandId
-	// rental.Car.CreatedAt = car.CreatedAt
-	// rental.Car.UpdatedAt = car.UpdatedAt
-
-	// customer, err := h.grpcClients.Authorization.GetUserByID(c.Request.Context(), &authorization.GetUserByIDRequest{
-	// 	Id: rental.CustomerId,
-	// })
-	// if err != nil {
-	// 	c.JSON(http.StatusUnauthorized, models.JSONErrorResponse{
-	// 		Error: "failed to get user",
-	// 	})
-	// 	return
-	// }
-	// rental.Customer.Id = customer.Id
-	// rental.Customer.Fname = customer.Fname
-	// rental.Customer.Lname = customer.Lname
-	// rental.Customer.Username = customer.Username
-	// rental.Customer.Password = customer.Password
-	// rental.Customer.UserType = customer.UserType
-	// rental.Customer.Address = customer.Address
-	// rental.Customer.Phone = customer.Phone
-	// rental.Customer.CreatedAt = customer.CreatedAt
-	// rental.Customer.UpdatedAt = customer.UpdatedAt
 
 	c.JSON(http.StatusCreated, models.JSONResponse{
 		Message: "Rental | Created",
@@ -180,26 +143,6 @@ func (h Handler) UpdateRental(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{Error: err.Error()})
 		return
 	}
-
-	// car, err := h.grpcClients.Car.GetCarByID(c.Request.Context(), &car.GetCarByIDRequest{
-	// 	Id: body.CarId,
-	// })
-	// if err != nil {
-	// 	c.JSON(http.StatusNotFound, models.JSONErrorResponse{
-	// 		Error: "Car not found to create rental",
-	// 	})
-	// 	return
-	// }
-
-	// customer, err := h.grpcClients.Authorization.GetUserByID(c.Request.Context(), &authorization.GetUserByIDRequest{
-	// 	Id: body.CustomerId,
-	// })
-	// if err != nil {
-	// 	c.JSON(http.StatusUnauthorized, models.JSONErrorResponse{
-	// 		Error: "User is not registired to rental car",
-	// 	})
-	// 	return
-	// }
 
 	updated, err := h.grpcClients.Rental.UpdateRental(c.Request.Context(), &rental.UpdateRentalRequest{
 		RentalId:   body.RentalId,
