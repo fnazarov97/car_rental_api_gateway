@@ -852,4 +852,9 @@ paths:
       summary: get rental by id
       tags:
       - rentals
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

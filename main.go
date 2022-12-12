@@ -14,12 +14,16 @@ import (
 
 // @license.name Apache 2.0
 // @license.url  http://www.apache.org/licenses/LICENSE-2.0.html
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 	conf := config.Load()
 
 	// programmatically set swagger info
 	docs.SwaggerInfo.Title = conf.App
 	docs.SwaggerInfo.Version = conf.AppVersion
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
 	router := gin.New()
 
