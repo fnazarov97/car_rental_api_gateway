@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"car_rental/genprotos/authorization"
 	"car_rental/genprotos/rental"
 	"car_rental/models"
 	"net/http"
@@ -188,5 +189,65 @@ func (h Handler) DeleteRental(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "rental deleted",
 		"data":    deleted,
+	})
+}
+
+// GetRentalsByUserId godoc
+// @Summary     List rental
+// @Description get rental
+// @Tags        rentals
+// @Accept      json
+// @Produce     json
+// @Param       offset        query    int    false "0"
+// @Param       limit         query    int    false "10"
+// @Param       search        query    string false "search"
+// @Param       Authorization header   string false "Authorization"
+// @Success     200           {object} models.JSONResponse{data=[]models.Rental}
+// @Router      /v1/rentals [get]
+func (h Handler) GetRentalsByUserId(c *gin.Context) {
+	offsetStr := c.DefaultQuery("offset", h.Conf.DefaultOffset)
+	limitStr := c.DefaultQuery("limit", h.Conf.DefaultLimit)
+	search := c.DefaultQuery("search", "")
+	offset, err := strconv.Atoi(offsetStr)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
+			Error: "offset error",
+		})
+		return
+	}
+	limit, err := strconv.Atoi(limitStr)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
+			Error: "limit error",
+		})
+		return
+	}
+	token := c.GetHeader("Authorization")
+	Access, err := h.grpcClients.Authorization.HasAccess(c.Request.Context(), &authorization.TokenRequest{
+		Token: token,
+	})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
+			Error: "error to get userId from token",
+		})
+		return
+	}
+
+	rentalList, err := h.grpcClients.Rental.GetRentalsByUserId(c.Request.Context(), &rental.GetRentalsByUserIdRequest{
+		Offset: int32(offset),
+		Limit:  int32(limit),
+		Search: search,
+		UserId: Access.User.Id,
+	})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
+			Error: err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, models.JSONResponse{
+		Message: "OK",
+		Data:    rentalList,
 	})
 }

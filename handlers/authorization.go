@@ -3,7 +3,6 @@ package handlers
 import (
 	"car_rental/genprotos/authorization"
 	"car_rental/models"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -23,7 +22,6 @@ func (h Handler) AuthMiddleware(userType string) gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-
 		if !hasAccessResponse.HasAccess {
 			c.JSON(http.StatusUnauthorized, "Unauthorized")
 			c.Abort()
@@ -61,7 +59,7 @@ func (h Handler) Login(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{Error: "err.Error()1"})
 		return
 	}
-	log.Println("-------------------------->", body.Password, body.Username)
+
 	// TODO - validation should be here
 	tokenResponse, err := h.grpcClients.Authorization.Login(c.Request.Context(), &authorization.LoginRequest{
 		Username: body.Username,
@@ -75,7 +73,7 @@ func (h Handler) Login(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusCreated, models.JSONResponse{
-		Message: "Article | GetList",
+		Message: "Your token:",
 		Data:    tokenResponse,
 	})
 }

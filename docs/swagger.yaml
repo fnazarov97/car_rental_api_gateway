@@ -852,6 +852,45 @@ paths:
       summary: get rental by id
       tags:
       - rentals
+  /v1/rentals:
+    get:
+      consumes:
+      - application/json
+      description: get rental
+      parameters:
+      - description: "0"
+        in: query
+        name: offset
+        type: integer
+      - description: "10"
+        in: query
+        name: limit
+        type: integer
+      - description: search
+        in: query
+        name: search
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Rental'
+                  type: array
+              type: object
+      summary: List rental
+      tags:
+      - rentals
 securityDefinitions:
   ApiKeyAuth:
     in: header

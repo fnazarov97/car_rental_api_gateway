@@ -12,11 +12,11 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @license.name Apache 2.0
-// @license.url  http://www.apache.org/licenses/LICENSE-2.0.html
+// @license.name               Apache 2.0
+// @license.url                http://www.apache.org/licenses/LICENSE-2.0.html
 // @securityDefinitions.apikey ApiKeyAuth
-// @in header
-// @name Authorization
+// @in                         header
+// @name                       Authorization
 func main() {
 	conf := config.Load()
 
@@ -58,13 +58,14 @@ func main() {
 
 		v1.POST("/brand", h.AuthMiddleware("*"), h.CreateBrand)
 		v1.GET("/brand/:id", h.AuthMiddleware("*"), h.GetBrandByID)
-		v1.GET("/brand", h.AuthMiddleware("*"), h.GetBrandList)
+		v1.GET("/brand", h.AuthMiddleware("ADMIN"), h.GetBrandList)
 		v1.PUT("/brand", h.AuthMiddleware("*"), h.UpdateBrand)
 		v1.DELETE("/brand/:id", h.AuthMiddleware("*"), h.DeleteBrand)
 
 		v1.POST("/rental", h.AuthMiddleware("*"), h.CreateRental)
 		v1.GET("/rental/:id", h.AuthMiddleware("*"), h.GetRentalByID)
 		v1.GET("/rental", h.AuthMiddleware("*"), h.GetRentalList)
+		v1.GET("/rentals", h.AuthMiddleware("*"), h.GetRentalsByUserId)
 		v1.PUT("/rental", h.AuthMiddleware("*"), h.UpdateRental)
 		v1.DELETE("/rental/:id", h.AuthMiddleware("*"), h.DeleteRental)
 	}
