@@ -14,7 +14,7 @@ type TokenResponse struct {
 }
 
 type CreateUserModel struct {
-	Id       string `json:"id" binding:"required"`
+	Id       string `json:"-"`
 	Fname    string `json:"fname" binding:"required"`
 	Lname    string `json:"lname" binding:"required"`
 	Username string `json:"username" binding:"required"`

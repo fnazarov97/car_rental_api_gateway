@@ -101,6 +101,31 @@ definitions:
     - rental_id
     - start_date
     type: object
+  models.CreateUserModel:
+    properties:
+      address:
+        type: string
+      fname:
+        type: string
+      lname:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      user_type:
+        type: string
+      username:
+        type: string
+    required:
+    - address
+    - fname
+    - lname
+    - password
+    - phone
+    - user_type
+    - username
+    type: object
   models.JSONErrorResponse:
     properties:
       error:
@@ -259,6 +284,34 @@ definitions:
     - payment
     - rental_id
     - start_date
+    type: object
+  models.UpdateUserModel:
+    properties:
+      address:
+        type: string
+      fname:
+        type: string
+      id:
+        type: string
+      lname:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      user_type:
+        type: string
+      username:
+        type: string
+    required:
+    - address
+    - fname
+    - id
+    - lname
+    - password
+    - phone
+    - user_type
+    - username
     type: object
   models.User:
     properties:
@@ -891,6 +944,180 @@ paths:
       summary: List rental
       tags:
       - rentals
+  /v1/user:
+    get:
+      consumes:
+      - application/json
+      description: get user
+      parameters:
+      - description: "0"
+        in: query
+        name: offset
+        type: integer
+      - description: "10"
+        in: query
+        name: limit
+        type: integer
+      - description: search
+        in: query
+        name: search
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.User'
+                  type: array
+              type: object
+      summary: List user
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: create a new user
+      parameters:
+      - description: user body
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateUserModel'
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.User'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Create user
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: update a new user
+      parameters:
+      - description: user body
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateUserModel'
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.User'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: update user
+      tags:
+      - users
+  /v1/user/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete an user by id
+      parameters:
+      - description: user ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.User'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: delete user by id
+      tags:
+      - users
+    get:
+      consumes:
+      - application/json
+      description: get an user by id
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.User'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: get user by id
+      tags:
+      - users
 securityDefinitions:
   ApiKeyAuth:
     in: header

@@ -68,6 +68,13 @@ func main() {
 		v1.GET("/rentals", h.AuthMiddleware("*"), h.GetRentalsByUserId)
 		v1.PUT("/rental", h.AuthMiddleware("*"), h.UpdateRental)
 		v1.DELETE("/rental/:id", h.AuthMiddleware("*"), h.DeleteRental)
+
+		v1.POST("/user", h.AuthMiddleware("*"), h.CreateUser)
+		v1.GET("/user/:id", h.AuthMiddleware("*"), h.GetUserByID)
+		v1.GET("/user", h.AuthMiddleware("*"), h.GetUserList)
+		v1.GET("/users", h.AuthMiddleware("*"), h.GetBrandByID)
+		v1.PUT("/user", h.AuthMiddleware("*"), h.UpdateUser)
+		v1.DELETE("/user/:id", h.AuthMiddleware("*"), h.DeleteUser)
 	}
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
